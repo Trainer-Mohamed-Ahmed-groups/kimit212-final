@@ -1,22 +1,34 @@
-import { Input } from "antd";
+import { StarFilled } from '@ant-design/icons';
 import Nav from "./layout/Nav";
 import { ThemeContext } from "./context/ThemeContext";
 import { useContext } from "react";
-import { useTranslation } from "react-i18next";
-function App() {
+import FeaturedProducts from './views/ProductDetails';
+import { Route, Routes } from 'react-router-dom';
+import ProductDetails from './views/SingleProduct';
+import { useTranslation } from 'react-i18next';
+import Home from './views/Home';
 
+function App() {
   const themeContext = useContext(ThemeContext);
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
-    <div className={(themeContext.themeColor === 'light' ? 'text-gray-800' : 'text-white bg-gray-800') + ' h-dvh'}>
+    <div
+      className={`
+        ${themeContext.themeColor === 'light' ? 'text-gray-800' : 'text-white bg-gray-800'}
+        ${i18n.language === 'ar' ? 'rtl' : ''}
+        font-(--main-font) min-h-dvh
+      `}
+    >
       <Nav />
-      <h1 className="text-3xl font-bold underline ms-3">
-        {t('hello')}
-      </h1>
-      <Input placeholder="Basic usage" className="!w-1/2" />
+
+      <Routes>
+        <Route path='/' Component={Home} />
+        <Route path='/products' Component={FeaturedProducts} />
+        <Route path='/products/:id' Component={ProductDetails} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

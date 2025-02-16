@@ -1,3 +1,18 @@
 {
-    "hello":"مرحبا بالعالم"
+    "hello": "مرحبا بالعالم",
+    "home": "الرئيسية",
+    "products": "من نحن",
+    "shop": "المتجر",
+    "on_sale": "تخفيضات",
+    "new_arrivals": "وصل حديثًا",
+    "contact": "اتصل بنا",
+    "search": "بحث...",
+    "menu": "القائمة",
+    "featured_products": "المنتجات المميزة",
+    "view_details": "عرض التفاصيل",
+    "show_more": "عرض المزيد",
+    "loading": "جاري التحميل...",
+    "product_not_found": "المنتج غير موجود",
+    "reviews": "تقييمات",
+    "add_to_cart": "أضف إلى السلة"
 }

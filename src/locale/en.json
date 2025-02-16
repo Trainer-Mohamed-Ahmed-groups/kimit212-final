@@ -1,3 +1,18 @@
 {
-    "hello": "Hello world"
+    "hello": "Hello world",
+    "home": "Home",
+    "products": "Products",
+    "shop": "Shop",
+    "on_sale": "On Sale",
+    "new_arrivals": "New Arrivals",
+    "contact": "Contact",
+    "search": "Search...",
+    "menu": "Menu",
+    "featured_products": "Featured Products",
+    "view_details": "View Details",
+    "show_more": "Show More",
+    "loading": "Loading...",
+    "product_not_found": "Product not found",
+    "reviews": "reviews",
+    "add_to_cart": "Add to Cart"
 }
