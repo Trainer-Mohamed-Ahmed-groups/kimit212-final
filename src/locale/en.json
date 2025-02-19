@@ -14,5 +14,6 @@
     "loading": "Loading...",
     "product_not_found": "Product not found",
     "reviews": "reviews",
-    "add_to_cart": "Add to Cart"
+    "add_to_cart": "Add to Cart",
+    "added_to_cart":"Added to cart"
 }

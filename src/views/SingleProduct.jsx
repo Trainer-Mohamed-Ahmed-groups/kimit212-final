@@ -1,19 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { StarFilled, StarOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { Spin } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
-
+import { CartContext } from "../context/CartContext";
 
 const ProductDetails = () => {
-
-
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
+    const { cartItems, handleCart } = useContext(CartContext);
+
+    // Check if the product is in the cart
+    const isInCart = cartItems.some(item => item.id === parseInt(id));
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -53,8 +55,15 @@ const ProductDetails = () => {
                 </div>
                 <p className="text-xl font-bold text-blue-600 mt-2">${product.price}</p>
                 <p className="mt-4 text-gray-700">{product.description}</p>
-                <button className="mt-6 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-700 w-full">
-                    {t("add_to_cart")}
+
+                {/* Change button based on cart status */}
+                <button
+                    className={`mt-6 px-6 py-2 rounded-lg w-full transition ${isInCart ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700"
+                        } text-white`}
+                    onClick={() => !isInCart && handleCart(product, "add")}
+                    disabled={isInCart}
+                >
+                    {isInCart ? t("added_to_cart") : t("add_to_cart")}
                 </button>
             </div>
         </section>

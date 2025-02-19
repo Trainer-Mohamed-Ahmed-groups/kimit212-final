@@ -9,6 +9,7 @@ import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 import en from "./locale/en.json"
 import ar from "./locale/ar.json"
+import CartProvider from './context/CartContext.jsx'
 
 i18n
   .use(initReactI18next)
@@ -33,7 +34,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,

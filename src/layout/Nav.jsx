@@ -1,35 +1,25 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MenuOutlined, CloseOutlined, DownOutlined, SearchOutlined, GlobalOutlined, BulbOutlined } from '@ant-design/icons';
-import { Drawer, Button, Input, Dropdown, Space } from 'antd';
+import { MenuOutlined, CloseOutlined, DownOutlined, SearchOutlined, GlobalOutlined, BulbOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Drawer, Button, Input, Dropdown, Space, Badge } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from "/icon.png"
 import { ThemeContext } from '../context/ThemeContext';
+import { CartContext } from '../context/CartContext';
 
 export default function Navbar() {
     const { t, i18n } = useTranslation();
     const [open, setOpen] = useState(false);
 
-
     const items = [
-        {
-            label: '1st menu item',
-            key: '1',
-        },
-        {
-            label: '2nd menu item',
-            key: '2',
-        },
-        {
-            label: '3rd menu item',
-            key: '3',
-        },
+        { label: '1st menu item', key: '1' },
+        { label: '2nd menu item', key: '2' },
+        { label: '3rd menu item', key: '3' },
     ];
-    const onClick = ({ key }) => {
-        message.info(`Click on item ${key}`);
-    };
+
 
     const themeContext = useContext(ThemeContext);
+    const cartContext = useContext(CartContext)
 
     const toggleDrawer = () => {
         setOpen(!open);
@@ -43,36 +33,32 @@ export default function Navbar() {
         <nav className={`shadow-md p-4 w-full ${themeContext.themeColor === 'light' ? 'text-gray-800' : 'text-white bg-gray-800'}`}>
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/">
-                    <span className="text-xl font-bold text-blue-600">
-                        <img src={logo} width={30} placeholder="Site logo" />
-                    </span>
+                    <img src={logo} width={30} alt="Site logo" />
                 </Link>
 
                 <div className="hidden md:flex space-x-10 items-center">
-                    <Link to="/" className=" hover:text-blue-600 text-nowrap">{t('home')}</Link>
-                    <Link to="/products" className=" hover:text-blue-600 text-nowrap">{t('products')}</Link>
-                    <Dropdown
-                        menu={{
-                            items,
-                            onClick,
-                        }}
-                    >
+                    <Link to="/" className="hover:text-blue-600 text-nowrap">{t('home')}</Link>
+                    <Link to="/products" className="hover:text-blue-600 text-nowrap">{t('products')}</Link>
+                    <Dropdown menu={{ items }}>
                         <a onClick={(e) => e.preventDefault()}>
                             <Space>
-                                Hover
-                                <DownOutlined />
+                                {t('shop')} <DownOutlined />
                             </Space>
                         </a>
                     </Dropdown>
-                    <Link to="/contact" className=" hover:text-blue-600 text-nowrap">{t('contact')}</Link>
+                    <Link to="/contact" className="hover:text-blue-600 text-nowrap">{t('contact')}</Link>
 
                     <Input placeholder={t('search')} prefix={<SearchOutlined />} className="hidden md:block w-64 rounded-lg bg-gray-300 p-4" />
 
                     <Space>
                         <Button type="text" icon={<GlobalOutlined style={{ filter: themeContext.themeColor === 'dark' ? 'invert(1)' : '' }} />} onClick={() => changeLanguage(i18n.language === 'en' ? 'ar' : 'en')} />
                         <Button type="text" icon={<BulbOutlined style={{ filter: themeContext.themeColor === 'dark' ? 'invert(1)' : '' }} />} onClick={themeContext.handleTheme} />
+                        <Link to="/cart" className="relative">
+                            <Badge count={cartContext.cartItems.length} offset={[10, 0]}>
+                                <ShoppingCartOutlined className="text-2xl" />
+                            </Badge>
+                        </Link>
                     </Space>
-
                 </div>
 
                 <div className="md:hidden flex items-center">
@@ -95,6 +81,11 @@ export default function Navbar() {
                 <div className='flex items-center justify-center mt-4'>
                     <Button type="text" icon={<GlobalOutlined />} onClick={() => changeLanguage(i18n.language === 'en' ? 'ar' : 'en')} />
                     <Button type="text" icon={<BulbOutlined />} onClick={themeContext.handleTheme} />
+                    <Link to="/cart" className="relative">
+                        <Badge count={cartContext.cartItems.length} offset={[10, 0]}>
+                            <ShoppingCartOutlined className="text-2xl" />
+                        </Badge>
+                    </Link>
                 </div>
             </Drawer>
         </nav>

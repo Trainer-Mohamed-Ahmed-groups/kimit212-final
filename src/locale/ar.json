@@ -14,5 +14,6 @@
     "loading": "جاري التحميل...",
     "product_not_found": "المنتج غير موجود",
     "reviews": "تقييمات",
-    "add_to_cart": "أضف إلى السلة"
+    "add_to_cart": "أضف إلى السلة",
+    "added_to_cart":"أضيف للسلة"
 }

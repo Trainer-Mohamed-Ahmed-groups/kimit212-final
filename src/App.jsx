@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import ProductDetails from './views/SingleProduct';
 import { useTranslation } from 'react-i18next';
 import Home from './views/Home';
+import Cart from './views/Cart';
+import Error from './views/error';
 
 function App() {
   const themeContext = useContext(ThemeContext);
@@ -26,6 +28,8 @@ function App() {
         <Route path='/' Component={Home} />
         <Route path='/products' Component={FeaturedProducts} />
         <Route path='/products/:id' Component={ProductDetails} />
+        <Route path='/cart' Component={Cart} />
+        <Route path='/*' Component={Error} />
       </Routes>
     </div>
   );
